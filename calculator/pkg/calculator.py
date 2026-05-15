@@ -2,6 +2,7 @@
 
 class Calculator:
     def __init__(self):
+        """Initialize calculator with operators and precedence rules."""
         self.operators = {
             "+": lambda a, b: a + b,
             "-": lambda a, b: a - b,
@@ -16,12 +17,14 @@ class Calculator:
         }
 
     def evaluate(self, expression):
+        """Evaluate infix expression string (space-separated tokens)."""
         if not expression or expression.isspace():
             return None
         tokens = expression.strip().split()
         return self._evaluate_infix(tokens)
 
     def _evaluate_infix(self, tokens):
+        """Shunting yard algorithm: handle operator precedence and associativity."""
         values = []
         operators = []
 
@@ -49,6 +52,7 @@ class Calculator:
         return values[0]
 
     def _apply_operator(self, operators, values):
+        """Pop operator and two operands, execute operation, push result."""
         if not operators:
             return
 
